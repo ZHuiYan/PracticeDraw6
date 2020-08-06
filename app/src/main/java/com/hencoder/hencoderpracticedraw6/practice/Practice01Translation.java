@@ -33,7 +33,7 @@ public class Practice01Translation extends RelativeLayout {
     public Practice01Translation(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
+    private State state = State.O;
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -46,13 +46,56 @@ public class Practice01Translation extends RelativeLayout {
         }
 
         animateBt.setOnClickListener(new OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+              switch (state){
+//                  case O:
+//                      imageView.animate().translationX(300);
+//                      state = State.X;
+//                      break;
+                  case X:
+                      imageView.animate().translationX(0);
+                      state = State.TY;
+                      break;
+                  case O:
+                  case TX:
+                      imageView.animate().translationX(300);
+                      state = State.X;
+                      break;
+                  case Y:
+                      imageView.animate().translationY(0);
+                      state = State.TZ;
+                      break;
+                  case TY:
+                      imageView.animate().translationY(300);
+                      state = State.Y;
+                      break;
+                  case Z:
+                      imageView.animate().translationZ(0);
+                      state = State.O;
+                      break;
+                  case TZ:
+                      imageView.animate().translationZ(300);
+                      state = State.Z;
+                      break;
+
+              }
+
             }
         });
     }
 
+    public enum State{
+        X,
+        TX,
+        Y,
+        TY,
+        Z,
+        TZ,
+        O
+    }
     /**
      * 为音乐图标设置三角形的 Outline。
      */

@@ -25,7 +25,7 @@ public class Practice05MultiProperties extends ConstraintLayout {
     public Practice05MultiProperties(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
+    boolean m = true;
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -35,10 +35,30 @@ public class Practice05MultiProperties extends ConstraintLayout {
         imageView.setScaleX(0);
         imageView.setScaleY(0);
         imageView.setAlpha(0f);
+
         animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO 在这里处理点击事件，同时对多个属性做动画
+                if (m){
+                    imageView.animate()
+                            .translationX(500)
+                            .rotation(360)
+
+                            .scaleX(1.0f)
+                            .scaleY(1.0f)
+                            .alpha(1f);
+                }else {
+                    imageView.animate()
+                            .translationX(0)
+                            .rotation(-360)
+
+                            .scaleX(0)
+                            .scaleY(0)
+                            .alpha(0f);
+                }
+                m = !m;
+
             }
         });
     }
